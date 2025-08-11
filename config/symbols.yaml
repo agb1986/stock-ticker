@@ -1,0 +1,9 @@
+symbols:
+  # Add crypto symbols
+  crypto:
+    - BTC
+    - ETH
+  # Add stock ISIN 
+  stock:
+    - US88160R1014 # TSLA
+    - US76655K1034 # RGTI
