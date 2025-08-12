@@ -4,7 +4,10 @@ go 1.22.2
 
 require github.com/Finnhub-Stock-API/finnhub-go/v2 v2.0.19
 
+require github.com/antihax/optional v1.0.0 // indirect
+
 require (
+	github.com/Finnhub-Stock-API/finnhub-go v1.2.1
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.15.0 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
