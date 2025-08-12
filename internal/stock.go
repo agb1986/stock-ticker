@@ -27,15 +27,23 @@ func __getStockSymbolsByIsin() []string {
 }
 
 // https://finnhub.io/docs/api/quote
-func getStockData() []finnhub.Quote {
-	var quoteData []finnhub.Quote
+func getStockData() []StockData {
+	var stockData []StockData
 
 	finnhubClient := __setupFinnhubClient()
 	for _, item := range __getStockSymbolsByIsin() {
 		quote, _, err := finnhubClient.Quote(context.Background()).Symbol(item).Execute()
 		handleError(err, "getStockData")
-		quoteData = append(quoteData, quote)
+		var sd StockData
+		sd.Name = item
+		sd.Quote = quote
+		stockData = append(stockData, sd)
 	}
 
-	return quoteData
+	return stockData
+}
+
+type StockData struct {
+	Name  string
+	Quote finnhub.Quote
 }

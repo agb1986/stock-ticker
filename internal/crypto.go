@@ -12,9 +12,9 @@ var CRYPTO_URL = "https://pro-api.coinmarketcap.com"
 
 // https://coinmarketcap.com/api/documentation/v1/#operation/getV2CryptocurrencyQuotesLatest
 
-func getCryptoData() []QuoteData {
+func getCryptoData() []CryptoData {
 	client := &http.Client{}
-	var quotes []QuoteData
+	var cryptoData []CryptoData
 
 	for _, item := range getCryptoSymbols() {
 		// API request to CoinMarketCap for cryptocurrency data
@@ -41,10 +41,18 @@ func getCryptoData() []QuoteData {
 		handleError(err, "getCryptoData")
 		var quoteData QuoteData
 		json.Unmarshal(marshaledData, &quoteData)
-		quotes = append(quotes, quoteData)
+		var cd CryptoData
+		cd.Name = item
+		cd.QuoteData = quoteData
+		cryptoData = append(cryptoData, cd)
 	}
 
-	return quotes
+	return cryptoData
+}
+
+type CryptoData struct {
+	Name      string
+	QuoteData QuoteData
 }
 
 // Nested data object within CoinMarketCap response
